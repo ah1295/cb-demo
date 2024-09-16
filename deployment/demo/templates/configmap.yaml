@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "demo.name" . }}-config
+  labels:
+    {{- include "demo.labels" . | nindent 4 }}
+data:
+  application.yml:
+{{- tpl (.Files.Get "application.yaml") . | toYaml | indent 2 }}
